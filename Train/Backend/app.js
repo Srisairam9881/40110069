@@ -17,12 +17,13 @@ const connection = mysql.createConnection({
 app.post('/train/register', (req, res) => {
   const { companyName, ownerName, rollNo, ownerEmail, accessCode } = req.body;
 
-  // Perform database operations
-  // Insert the registration details into the database
+  
+  const clientID='646128a0-fbde-4c16-a4b1-6ae6ad718e27';
+  const clientSecret='XOyoIORPayKBODAN'
 
   // Example query to insert data into a 'companies' table
-  const query = `INSERT INTO companies (companyName, ownerName, rollNo, ownerEmail, accessCode) VALUES (?, ?, ?, ?, ?)`;
-  const values = [companyName, ownerName, rollNo, ownerEmail, accessCode];
+  const query = `INSERT INTO companies (companyName, ownerName, rollNo, ownerEmail, accessCode,clientID,clientSecret) VALUES (?, ?, ?, ?, ?,?,?)`;
+  const values = [companyName, ownerName, rollNo, ownerEmail, accessCode,clientID,clientSecret];
 
   connection.query(query, values, (err, result) => {
     if (err) {
@@ -66,12 +67,7 @@ app.post('/train/auth', (req, res) => {
 
 // API to get all train details
 app.get('/train/trains', (req, res) => {
-  // Verify the authorization token from the request headers
 
-  // Perform database operations
-  // Retrieve all train details from the database
-
-  // Example query to retrieve all data from a 'trains' table
   const query = `SELECT * FROM trains`;
 
   connection.query(query, (err, result) => {
@@ -89,12 +85,7 @@ app.get('/train/trains', (req, res) => {
 app.get('/train/trains/:trainNumber', (req, res) => {
   const { trainNumber } = req.params;
 
-  // Verify the authorization token from the request headers
 
-  // Perform database operations
-  // Retrieve details of the specified train from the database
-
-  // Example query to retrieve data from a 'trains' table based on trainNumber
   const query = `SELECT * FROM trains WHERE trainNumber = ?`;
   const values = [trainNumber];
 
